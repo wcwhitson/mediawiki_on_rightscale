@@ -2,11 +2,17 @@
 
 == DESCRIPTION:
 
-This cookbook provides a set of chef recipies that you can use to install,
+This cookbook provides a set of chef recipes that you can use to install,
 configure, and maintain MediaWiki on RightScale.
 
 The recipes in this cookbook are not tied to a particular ServerTemplate,
 but can be used in various combinations with other RightScale chef recipes.
+
+I wrote this cookbook to support my own personal and professional use of
+MediaWiki, so the result is, unsurprisingly, tailored to fit my needs.
+Although I have turned a lot of configuration settings into inputs, in
+most cases, I haven't done much testing, so selecting values other than
+the defaults may have unpredictable results.
 
 == USE:
 
@@ -14,27 +20,34 @@ Add mediawiki_install to the boot scripts for your ServerTemplate and set
 the MEDIAWIKI inputs.  Add mediawiki_first_time_config and
 mediawiki_update_settings to the operational scripts for your ServerTemplate.
 Also add any mediawiki_extension recipes that you wish to use to the
-operational scripts.
+operational scripts.  You can add the extension recipes to the boot scripts,
+but I recommend that you test them as operational scripts first.  The
+extensions recipes have the same dependencies as the extensions themselves,
+so you must add them to the ServerTemplate in the proper order so that the
+dependency extensions are installed before the extensions that depend on them.
 
 If you already have a MediaWiki database, install it on the server, either
 manually, or by using RightScale database manager recipes such as
 db::do_primary_restore, db::do_secondary_restore, or db::do_dump_import.
-This script installs MediaWiki and creates a LocalSettings.php file, but
-does not configure the database.
+The mediawiki_install recipe installs MediaWiki and creates a 
+LocalSettings.php file, but does not configure the database.
 
 If you need to configure a new MediaWiki database, run the
 mediawiki_first_time_config operational script.  This script configures
 a new MediaWiki database and updates the LocalSettings.php file as 
 necessary.
 
+Extensions configuration is not done in LocalSettings.php, but in individual
+configuration files located in LocalSettings.d in the main MediaWiki
+directory.  This makes it easier to manage adding and removing extensions.
+
 == REQUIREMENTS:
 
-This recipe installs only MediaWiki.  You must satisfy the normal 
-dependencies for MediaWiki by adding recipes to your ServerTemplate that
-install a database, PHP, and a web server.  The RightScale LAMP 
-ServerTemplate is a good base on which to add MediaWiki.
+You must satisfy the normal dependencies for MediaWiki by adding recipes to 
+your ServerTemplate that install a database, PHP, and a web server.  The 
+RightScale LAMP  ServerTemplate is a good base on which to add MediaWiki.
 
-* The RepoPath for the ServerTemplate that uses these recipes must include 
+The RepoPath for the ServerTemplate that uses these recipes must include 
 the rightscale_cookbooks repository.
 
 == COOKBOOKS DEPENDENCIES:
@@ -43,16 +56,8 @@ Please see the <tt>metadata.rb</tt> file for the current dependencies.
 
 == KNOWN LIMITATIONS:
 
-This recipe does not perform first-time configuration of the MediaWiki
-database.
-
 Please see the <tt>metadata.rb</tt> file for the current list of supported
 operating systems.
-
-== SETUP:
-
-* Place the <tt>cloudoptimizer::install_mediawiki</tt> recipe into your 
-  runlist to install and set up MediaWiki.
 
 = LICENSE:
 

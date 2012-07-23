@@ -1,0 +1,83 @@
+<?php
+define('RP_VERSION','0.1.0, 2009-06-18');
+ 
+//Extension credits that show up on Special:Version
+$wgExtensionCredits['parserhook'][] = array(
+ 'name' => 'Recently Created Page List',
+ 'url' => 'http://shadowfax.org.uk/wiki/',
+ 'version' => RP_VERSION,
+ 'author' => '[http://shadowfax.org.uk/wiki Ian Coleman]',
+ 'description' => 'Parser hook to list recently created pages.'
+);
+ 
+// Avoid unstubbing $wgParser on setHook() too early on modern (1.12+) MW versions, as 
+// per r35980
+if ( defined( 'MW_SUPPORTS_PARSERFIRSTCALLINIT' ) ) {
+ $wgHooks['ParserFirstCallInit'][] = 'rpInit';
+} else {
+ $wgExtensionFunctions[] = 'rpInit';
+}
+ 
+function rpInit(){
+ global $wgParser;
+ $wgParser->setHook ( 'recent', 'recentPages' );
+ return true;
+}
+ 
+function recentPages($text,$args)
+{
+global $wgParser;
+global $wgUser;
+ 
+$skin = $wgUser->getSkin();
+ 
+$ret = "";
+ 
+$limitArr=array("ORDER BY"=>"page_id desc limit 5");
+if (isset($args['limit']))
+  { 
+  if (is_numeric($args['limit']))
+    $limitArr=array("ORDER BY"=>"page_id desc limit " . $args['limit']);
+  elseif ($args['limit'] == "none") $limitArr="";
+  }
+ 
+if (isset($args['namespace'])) 
+  if ($args['namespace']=="all") $where = "";
+  else
+    $where = array ("page_namespace" => rpGetNSID($args['namespace']));
+else
+  $where = array ("page_namespace" => 0);
+ 
+$dbr = wfGetDB( DB_SLAVE );
+$res = $dbr->select("page", "page_title, page_namespace",
+                    $where, __METHOD__, $limitArr, "");
+ 
+if ($res)
+  {
+  $ret ="<div id='recentpages'><ul>";
+  $numRows = $dbr->numRows( $res);
+ 
+  for ($i=1; $i<=$numRows; $i++)
+    {
+    $row = $dbr->fetchRow( $res );
+ 
+    $title = Title::newFromText ($row['page_title'], $row['page_namespace']);
+    if (!is_null($title)) 
+      $ret .= "<li>" . $skin->makeKnownLinkObj($title, $displayText, "") . "</li>\n";
+    }
+  $ret .= "</ul></div>\n";
+  }
+return $ret;
+}
+ 
+// Function to get namespace id from name
+function rpGetNSID($namespace)
+{
+if ($namespace == "") return 0;
+else
+  {
+  $ns = new MWNamespace();
+  return $ns->getCanonicalIndex(trim(strtolower($namespace)));
+  }
+}
+?>

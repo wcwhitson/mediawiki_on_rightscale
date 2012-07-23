@@ -37,6 +37,13 @@ define :mediawiki_install_extension do
       repository "#{params[:repo_snv]}"
       action :checkout
     end
+  elsif params[:local_file]
+    template "#{install_dir}/#{params[:name]}.php" do
+      source "#{params[:local_file]}"
+      mode "0644"
+      owner "root"
+      group "root"
+    end
   else
     log "ERROR: No supported repository type."
   end

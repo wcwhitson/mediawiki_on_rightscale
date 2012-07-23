@@ -3,7 +3,7 @@ maintainer_email "billspamcan@gmail.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.10"
+version "0.11"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -35,6 +35,11 @@ recipe "mediawiki::mediawiki_extension_googleanalytics", "Install and configure 
 recipe "mediawiki::mediawiki_extension_liquidthreads", "Install and configure the LiquidThreads extension"
 recipe "mediawiki::mediawiki_extension_nuke", "Install and configure the Nuke extension"
 recipe "mediawiki::mediawiki_extension_openid", "Install and configure the OpenID extension"
+recipe "mediawiki::mediawiki_extension_parserfunctions", "Install and configure the ParserFunctions extension"
+recipe "mediawiki::mediawiki_extension_prefswitch", "Install and configure the PrefSwitch extension"
+recipe "mediawiki::mediawiki_extension_recentpages", "Install and configure the RecentPages extension"
+recipe "mediawiki::mediawiki_extension_renameuser", "Install and configure the RenameUser extension"
+recipe "mediawiki::mediawiki_extension_simplesurvey", "Install and configure the SimpleSurvey extension"
 
 attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",

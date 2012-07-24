@@ -12,8 +12,15 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "ClickTracking" do
-     repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ClickTracking.git"
+if node[:mediawiki_extensions][:clicktracking][:enable] == "true"
+  mediawiki_install_extension "ClickTracking" do
+    repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ClickTracking.git"
+  end
+elsif node[:mediawiki_extensions][:clicktracking][:enable] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/ClickTrackingSettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for ClickTracking extension."
 end
-
 rightscale_marker :end

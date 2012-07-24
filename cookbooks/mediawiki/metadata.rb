@@ -41,7 +41,119 @@ recipe "mediawiki::mediawiki_extension_recentpages", "Install and configure the 
 recipe "mediawiki::mediawiki_extension_renameuser", "Install and configure the RenameUser extension"
 recipe "mediawiki::mediawiki_extension_simplesurvey", "Install and configure the SimpleSurvey extension"
 
-attribute "mediawiki_extensions/articlefeedback/enable_disable",
+attribute "mediawiki_extensions/collection/enable",
+  :display_name => "Collection Extension",
+  :description => "Enable the Collection extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_collection" ]
+    
+attribute "mediawiki_extensions/collection/pod_partner",
+  :display_name => "Collection print on demand partner",
+  :description => "Define a print on demand partner",
+  :required => "optional",
+  :default => "array('name' => 'PediaPress', 'url' => 'http://pediapress.com/', 'posturl' => 'http://pediapress.com/api/collections/', 'infopagetitle' => 'coll-order_info_article')",
+  :recipes => [ "mediawiki::mediawiki_extension_collection" ]
+    
+attribute "mediawiki_extensions/categorytree/enable",
+  :display_name => "CategoryTree Extension",
+  :description => "Enable the CategoryTree extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/max_children",
+  :display_name => "CategoryTree max children",
+  :description => "Maximum number of children shown in a tree node. Default is 200.",
+  :required => "optional",
+  :default => "200",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/allow_tag",
+  :display_name => "CategoryTree allow tag",
+  :description => "Enable <categorytree> tag. Default is true.",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/dynamic_tag",
+  :display_name => "CategoryTree dynamic tag",
+  :description => "Loads the first level of the tree in a <categorytree> dynamically. This way, the cache does not need to be disabled. Default is false.",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/disable_cache",
+  :display_name => "CategoryTree disable cache",
+  :description => "Disables the parser cache for pages with a <categorytree> tag. Default is true.",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/http_cache",
+  :display_name => "CategoryTree HTTP cache",
+  :description => "Enable HTTP cache for anon users. Default is false.",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/max_depth",
+  :display_name => "CategoryTree max depth",
+  :description => "Maximum number of children shown in a tree node. Default is 200.",
+  :required => "optional",
+  :default => "CT_MODE_PAGES => 1, CT_MODE_ALL => 1, CT_MODE_CATEGORIES => 2",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/force_headers",
+  :display_name => "CategoryTree force headers",
+  :description => "If true, forces the scripts needed by CategoryTree on every page, instead of on-demand. This may be needed if a CategoryTree is embedded in an unusual way, for example in a custom skin or in a system message.",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/sidebar_root",
+  :display_name => "CategoryTree sidebar root",
+  :description => "Root category to use for integrating the category tree in the sidebar (since rev:36920, July 2008). If not set, no tree is integrated (this is the default).",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/default_options",
+  :display_name => "CategoryTree default options",
+  :description => "Default options to apply, as an array (since rev:36864, July 2008).",
+  :required => "optional",
+  :default => "hideprefix => false, mode => pages",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/page_options",
+  :display_name => "CategoryTree category page options",
+  :description => "Options to use on category pages, as an array.",
+  :required => "optional",
+  :default => "hideprefix => false, mode => pages",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/sidebar_options",
+  :display_name => "CategoryTree sidebar options",
+  :description => "Options to use when showing the tree in the sidebar, as an array.",
+  :required => "optional",
+  :default => "hideprefix => false, mode => pages",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/categorytree/special_options",
+  :display_name => "CategoryTree special page options",
+  :description => "Options to use on Special:CategoryTree, as an array.",
+  :required => "optional",
+  :default => "hideprefix => false, mode => pages",
+  :recipes => [ "mediawiki::mediawiki_extension_categorytree" ]
+    
+attribute "mediawiki_extensions/articlefeedback/enable",
   :display_name => "ArticleFeedback Extension",
   :description => "Enable the ArticleFeedback extension",
   :required => "optional",
@@ -92,7 +204,7 @@ attribute "mediawiki_extensions/articlefeedback/ratings",
   :default => "",
   :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
     
-attribute "mediawiki_extensions/simplesurvey/enable_disable",
+attribute "mediawiki_extensions/simplesurvey/enable",
   :display_name => "SimpleSurvey Extension",
   :description => "Enable the SimpleSurvey extension",
   :required => "optional",
@@ -100,7 +212,7 @@ attribute "mediawiki_extensions/simplesurvey/enable_disable",
   :choice => [ "false", "true" ],
   :recipes => [ "mediawiki::mediawiki_extension_simplesurvey" ]
     
-attribute "mediawiki_extensions/prefswitch/enable_disable",
+attribute "mediawiki_extensions/prefswitch/enable",
   :display_name => "PrefSwitch Extension",
   :description => "Enable the PrefSwitch extension",
   :required => "optional",
@@ -108,7 +220,7 @@ attribute "mediawiki_extensions/prefswitch/enable_disable",
   :choice => [ "false", "true" ],
   :recipes => [ "mediawiki::mediawiki_extension_prefswitch" ]
     
-attribute "mediawiki_extensions/emailcapture/enable_disable",
+attribute "mediawiki_extensions/emailcapture/enable",
   :display_name => "EmailCapture Extension",
   :description => "Enable the EmailCapture extension",
   :required => "optional",
@@ -116,7 +228,7 @@ attribute "mediawiki_extensions/emailcapture/enable_disable",
   :choice => [ "false", "true" ],
   :recipes => [ "mediawiki::mediawiki_extension_emailcapture" ]
     
-attribute "mediawiki_extensions/clicktracking/enable_disable",
+attribute "mediawiki_extensions/clicktracking/enable",
   :display_name => "ClickTracking Extension",
   :description => "Enable the ClickTracking extension",
   :required => "optional",
@@ -131,7 +243,7 @@ attribute "mediawiki_extensions/clicktracking/throttle",
   :default => "10",
   :recipes => [ "mediawiki::mediawiki_extension_clicktracking" ]
     
-attribute "mediawiki_extensions/addthis/enable_disable",
+attribute "mediawiki_extensions/addthis/enable",
   :display_name => "AddThis Extension",
   :description => "Enable the AddThis extension",
   :required => "optional",

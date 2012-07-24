@@ -15,5 +15,16 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $wgUseAjax = true;
 require_once("$IP/extensions/CategoryTree/CategoryTree.php");
 $wgEnableMWSuggest = true;
-$wgCategoryTreeSidebarRoot = 'Category:CloudOptimizer';
-$wgCategoryTreeForceHeaders = true;
+
+$wgCategoryTreeMaxChildren = <%= node[:mediawiki_extensions][:categorytree][:max_children] %>;
+$wgCategoryTreeAllowTag = "<%= node[:mediawiki_extensions][:categorytree][:allow_tag] %>";
+$wgCategoryTreeDynamicTag = "<%= node[:mediawiki_extensions][:categorytree][:dynamic_tag] %>";
+$wgCategoryTreeDisableCache = "<%= node[:mediawiki_extensions][:categorytree][:disable_cache] %>";
+$wgCategoryTreeHTTPCache = "<%= node[:mediawiki_extensions][:categorytree][:http_cache] %>";
+$wgCategoryTreeMaxDepth = array(<%= node[:mediawiki_extensions][:categorytree][:max_depth] %>);
+$wgCategoryTreeForceHeaders = "<%= node[:mediawiki_extensions][:categorytree][:force_headers] %>";
+$wgCategoryTreeSidebarRoot  = "<%= node[:mediawiki_extensions][:categorytree][:sidebar_root] %>";
+$wgCategoryTreeDefaultOptions = array(<%= node[:mediawiki_extensions][:categorytree][:default_options] %>);
+$wgCategoryTreeCategoryPageOptions = array(<%= node[:mediawiki_extensions][:categorytree][:page_options] %>);
+$wgCategoryTreeSpecialPageOptions = array(<%= node[:mediawiki_extensions][:categorytree][:special_options] %>);
+$wgCategoryTreeSidebarOptions = array(<%= node[:mediawiki_extensions][:categorytree][:sidebar_options] %>);

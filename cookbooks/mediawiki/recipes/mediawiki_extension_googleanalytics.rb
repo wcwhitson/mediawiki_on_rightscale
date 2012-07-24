@@ -12,8 +12,15 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "googleAnalytics" do
-     repo_svn "http://svn.wikimedia.org/svnroot/mediawiki/trunk/extensions/googleAnalytics/"
+if node[:mediawiki_extensions][:googleanalytics][:enable] == "true"
+  mediawiki_install_extension "googleAnalytics" do
+    repo_svn "http://svn.wikimedia.org/svnroot/mediawiki/trunk/extensions/googleAnalytics/"
+  end
+elsif node[:mediawiki_extensions][:googleanalytics][:enable] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/googleAnalyticsSettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for googleAnalytics extension."
 end
-
 rightscale_marker :end

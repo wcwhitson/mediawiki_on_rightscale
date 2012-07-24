@@ -13,6 +13,22 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 require_once("$IP/extensions/Collection/Collection.php");
+
+$wgCollectionPODPartners = "<%= node[:mediawiki_extensions][:collection][:pod_partner] %>";
+$wgCollectionMWServeURL = "<%= node[:mediawiki_extensions][:collection][:render_url] %>";
+$wgCollectionMWServeCert = "<%= node[:mediawiki_extensions][:collection][:render_cert] %>";
+$wgCollectionMWServeCredentials = "<%= node[:mediawiki_extensions][:collection][:render_creds] %>";
+$wgCollectionFormats = array(<%= node[:mediawiki_extensions][:collection][:formats] %>);
+$wgCollectionContentTypeToFilename
+$wgCollectionPortletFormats
+$wgCollectionHierarchyDelimiter
+$wgCollectionArticleNamespaces
+$wgCommunityCollectionNamespace
+$wgCollectionMaxArticles
+$wgCollectionLicenseName
+$wgCollectionLicenseURL
+$wgEnableWriteAPI
+
 $wgEnableWriteAPI = true;
 $wgGroupPermissions['autoconfirmed']['collectionsaveasuserpage'] = true; 
 $wgGroupPermissions['autoconfirmed']['collectionsaveascommunitypage'] = true; 

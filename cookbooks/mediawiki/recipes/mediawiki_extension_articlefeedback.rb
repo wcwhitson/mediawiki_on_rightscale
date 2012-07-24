@@ -12,8 +12,15 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "ArticleFeedback" do
-     repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ArticleFeedback.git"
+if node[:mediawiki_extensions][:articlefeedback][:enable] == "true"
+  mediawiki_install_extension "ArticleFeedback" do
+    repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/ArticleFeedback.git"
+  end
+elsif node[:mediawiki_extensions][:articlefeedback][:enable] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/ArticleFeedbackSettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for ArticleFeedback extension."
 end
-
 rightscale_marker :end

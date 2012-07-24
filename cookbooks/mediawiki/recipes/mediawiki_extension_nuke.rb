@@ -12,8 +12,15 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "Nuke" do
-     repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Nuke.git"
+if node[:mediawiki_extensions][:nuke][:enable] == "true"
+  mediawiki_install_extension "Nuke" do
+    repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Nuke.git"
+  end
+elsif node[:mediawiki_extensions][:addthis][:nuke] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/NukeSettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for Nuke extension."
 end
-
 rightscale_marker :end

@@ -12,8 +12,15 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "CategoryTree" do
-     repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/CategoryTree.git"
+if node[:mediawiki_extensions][:categorytree][:enable] == "true"
+  mediawiki_install_extension "CategoryTree" do
+    repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/CategoryTree.git"
+  end
+elsif node[:mediawiki_extensions][:categorytree][:enable] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/CategoryTreeSettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for CategoryTree extension."
 end
-
 rightscale_marker :end

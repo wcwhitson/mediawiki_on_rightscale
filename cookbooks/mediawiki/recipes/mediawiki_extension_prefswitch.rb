@@ -12,8 +12,16 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "PrefSwitch" do
-     repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PrefSwitch.git"
+if node[:mediawiki_extensions][:prefswitch][:enable] == "true"
+  mediawiki_install_extension "PrefSwitch" do
+    repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PrefSwitch.git"
+  end
+elsif node[:mediawiki_extensions][:prefswitch][:enable] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/PrefSwitchSettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for PrefSwitch extension."
 end
 
 rightscale_marker :end

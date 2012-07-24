@@ -12,8 +12,15 @@
 
 rightscale_marker :begin
 
-mediawiki_install_extension "SimpleSurvey" do
-     repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SimpleSurvey.git"
+if node[:mediawiki_extensions][:simplesurvey][:enable] == "true"
+  mediawiki_install_extension "SimpleSurvey" do
+    repo_git "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/SimpleSurvey.git"
+  end
+elsif node[:mediawiki_extensions][:simplesurvey][:enable] == "false"
+  file "#{node[:mediawiki][:installation_directory]}/#{node[:mediawiki][:ext_config_dir]}/SimpleSurveySettings.php" do
+    :delete
+  end
+else
+  log "ERROR: No possible action for SimpleSurvey extension."
 end
-
 rightscale_marker :end

@@ -13,3 +13,5 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 require_once("$IP/extensions/ClickTracking/ClickTracking.php");
+
+$wgClickTrackThrottle = <%= node[:mediawiki_extensions][:clicktracking][:throttle] %>;

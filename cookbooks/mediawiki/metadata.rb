@@ -3,7 +3,7 @@ maintainer_email "billspamcan@gmail.com"
 license "All rights reserved"
 description "Installs/Configures/Removes MediaWiki"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version "0.11"
+version "0.12"
 
 supports "centos", "~> 5.6"
 supports "centos", "~> 5.7"
@@ -40,6 +40,197 @@ recipe "mediawiki::mediawiki_extension_prefswitch", "Install and configure the P
 recipe "mediawiki::mediawiki_extension_recentpages", "Install and configure the RecentPages extension"
 recipe "mediawiki::mediawiki_extension_renameuser", "Install and configure the RenameUser extension"
 recipe "mediawiki::mediawiki_extension_simplesurvey", "Install and configure the SimpleSurvey extension"
+
+attribute "mediawiki_extensions/articlefeedback/enable_disable",
+  :display_name => "ArticleFeedback Extension",
+  :description => "Enable the ArticleFeedback extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/articlefeedback/categories",
+  :display_name => "ArticleFeedback categories",
+  :description => "An array of category titles (using '_'s instead of spaces). Pages in any of these categories will have the rating widget shown.",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/articlefeedback/blacklist",
+  :display_name => "ArticleFeedback blacklist",
+  :description => "Which categories the pages must not belong to have the rating widget added (with _ in text).",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/articlefeedback/namespaces",
+  :display_name => "ArticleFeedback namespaces",
+  :description => "Only enable the rating widget in these namespaces (regardless of the category of the page).",
+  :required => "optional",
+  :default => "$wgContentNamespaces",
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/articlefeedback/lottery",
+  :display_name => "ArticleFeedback lottery odds",
+  :description => "Articles not categorized as one of the values in $wgArticleFeedbackCategories can still have the rating widget psudo-randomly activated by applying the following odds to a lottery based on $wgArticleId. The value can be a floating point number (percentage) in range of 0 - 100, 0 being always off, 100 being always on. Tenths of a percent are the smallest increments used.",
+  :required => "optional",
+  :default => "0",
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/articlefeedback/dashboard",
+  :display_name => "ArticleFeedback dashboard",
+  :description => "Enable the ArticleFeedback dashboard",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/articlefeedback/ratings",
+  :display_name => "ArticleFeedback ratings",
+  :description => "A good way to configure the categories is configurable 'just fine' using $wgArticleFeedbackRatings and corresponding entries in the article_feedback_ratings table.",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_extension_articlefeedback" ]
+    
+attribute "mediawiki_extensions/simplesurvey/enable_disable",
+  :display_name => "SimpleSurvey Extension",
+  :description => "Enable the SimpleSurvey extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_simplesurvey" ]
+    
+attribute "mediawiki_extensions/prefswitch/enable_disable",
+  :display_name => "PrefSwitch Extension",
+  :description => "Enable the PrefSwitch extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_prefswitch" ]
+    
+attribute "mediawiki_extensions/emailcapture/enable_disable",
+  :display_name => "EmailCapture Extension",
+  :description => "Enable the EmailCapture extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_emailcapture" ]
+    
+attribute "mediawiki_extensions/clicktracking/enable_disable",
+  :display_name => "ClickTracking Extension",
+  :description => "Enable the ClickTracking extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_clicktracking" ]
+    
+attribute "mediawiki_extensions/clicktracking/throttle",
+  :display_name => "ClickTracking Extension",
+  :description => "Track 1 in every 10 clicks; set to 1 to track all clicks, -1 to disable",
+  :required => "optional",
+  :default => "10",
+  :recipes => [ "mediawiki::mediawiki_extension_clicktracking" ]
+    
+attribute "mediawiki_extensions/addthis/enable_disable",
+  :display_name => "AddThis Extension",
+  :description => "Enable the AddThis extension",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/header",
+  :display_name => "AddThis header",
+  :description => "Display AddThis widget toolbar in article header",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/sidebar",
+  :display_name => "AddThis sidebar",
+  :description => "Display AddThis widget as sidebar portlet",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/main_page",
+  :display_name => "AddThis main page",
+  :description => "Display AddThis widget toolbar on the main page",
+  :required => "optional",
+  :default => "true",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/address_bar_sharing",
+  :display_name => "AddThis address bar sharing",
+  :description => "Address Bar Sharing Analytics is a new feature that measures how often users share your site by copying the page URL from their address bar and sending it via email, IM or other channels.",
+  :required => "optional",
+  :default => "false",
+  :choice => [ "false", "true" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/profile_id",
+  :display_name => "AddThis profile ID",
+  :description => "Enter your AddThis profile ID to use the AddThis reporting service",
+  :required => "optional",
+  :default => "",
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/background_color",
+  :display_name => "AddThis background color",
+  :description => "Background color for AddThis toolbox displayed in article header",
+  :required => "optional",
+  :default => "#f6f6f6",
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/border_color",
+  :display_name => "AddThis border color",
+  :description => "Border color for AddThis toolbox displayed in article header",
+  :required => "optional",
+  :default => "#a7d7f9",
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+
+attribute "mediawiki_extensions/addthis/svc_code_button_0",
+  :display_name => "AddThis first button service code",
+  :description => "Service code for 1st button in sidebar",
+  :required => "optional",
+  :default => "compact",
+  :choice => [ "aim", "baidu", "bitly", "blip", "blogger", "care2", "compact", "delicious", "digg", "email", "evernote", "facebook", "fark", "farkinda", "google_plusone", "identica", "linkedin", "myspace", "orkut", "reddit", "stumbleupon", "tumblr", "twitter", "xing", "zingme" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/svc_code_button_1",
+  :display_name => "AddThis second button service code",
+  :description => "Service code for 2nd button in sidebar",
+  :required => "optional",
+  :default => "facebook",
+  :choice => [ "aim", "baidu", "bitly", "blip", "blogger", "care2", "compact", "delicious", "digg", "email", "evernote", "facebook", "fark", "farkinda", "google_plusone", "identica", "linkedin", "myspace", "orkut", "reddit", "stumbleupon", "tumblr", "twitter", "xing", "zingme" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/svc_code_button_2",
+  :display_name => "AddThis third button service code",
+  :description => "Service code for 3rd button in sidebar",
+  :required => "optional",
+  :default => "twitter",
+  :choice => [ "aim", "baidu", "bitly", "blip", "blogger", "care2", "compact", "delicious", "digg", "email", "evernote", "facebook", "fark", "farkinda", "google_plusone", "identica", "linkedin", "myspace", "orkut", "reddit", "stumbleupon", "tumblr", "twitter", "xing", "zingme" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/svc_code_button_3",
+  :display_name => "AddThis fourth button service code",
+  :description => "Service code for 4th button in sidebar",
+  :required => "optional",
+  :default => "google_plusone",
+  :choice => [ "aim", "baidu", "bitly", "blip", "blogger", "care2", "compact", "delicious", "digg", "email", "evernote", "facebook", "fark", "farkinda", "google_plusone", "identica", "linkedin", "myspace", "orkut", "reddit", "stumbleupon", "tumblr", "twitter", "xing", "zingme" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
+    
+attribute "mediawiki_extensions/addthis/svc_code_button_4",
+  :display_name => "AddThis fifth button service code",
+  :description => "Service code for 5th button in sidebar",
+  :required => "optional",
+  :default => "email",
+  :choice => [ "aim", "baidu", "bitly", "blip", "blogger", "care2", "compact", "delicious", "digg", "email", "evernote", "facebook", "fark", "farkinda", "google_plusone", "identica", "linkedin", "myspace", "orkut", "reddit", "stumbleupon", "tumblr", "twitter", "xing", "zingme" ],
+  :recipes => [ "mediawiki::mediawiki_extension_addthis" ]
 
 attribute "mediawiki/installation_directory",
   :display_name => "Installation directory",

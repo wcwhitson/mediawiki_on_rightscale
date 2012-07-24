@@ -13,3 +13,16 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 require_once("$IP/extensions/AddThis/AddThis.php");
+
+$wgAddThispubid = "<%= node[:mediawiki_extensions][:addthis][:profile_id] %>";
+$wgAddThisBackground = "<%= node[:mediawiki_extensions][:addthis][:background_color] %>";
+$wgAddThisBorder = "<%= node[:mediawiki_extensions][:addthis][:border_color] %>";
+$wgAddThisSidebar = "<%= node[:mediawiki_extensions][:addthis][:sidebar] %>";
+$wgAddThisHeader = "<%= node[:mediawiki_extensions][:addthis][:header] %>";
+$wgAddThisMain = "<%= node[:mediawiki_extensions][:addthis][:main_page] %>";
+$wgAddThis['addressbarsharing'] = "<%= node[:mediawiki_extensions][:addthis][:address_bar_sharing] %>";
+$wgAddThisSBServ[0]['service'] = "<%= node[:mediawiki_extensions][:addthis][:svc_code_button_0] %>";
+$wgAddThisSBServ[1]['service'] = "<%= node[:mediawiki_extensions][:addthis][:svc_code_button_1] %>";
+$wgAddThisSBServ[2]['service'] = "<%= node[:mediawiki_extensions][:addthis][:svc_code_button_2] %>";
+$wgAddThisSBServ[3]['service'] = "<%= node[:mediawiki_extensions][:addthis][:svc_code_button_3] %>";
+$wgAddThisSBServ[4]['service'] = "<%= node[:mediawiki_extensions][:addthis][:svc_code_button_4] %>";

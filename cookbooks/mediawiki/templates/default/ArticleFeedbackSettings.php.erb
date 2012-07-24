@@ -13,3 +13,10 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 
 require_once( "$IP/extensions/ArticleFeedback/ArticleFeedback.php" );
+
+$wgArticleFeedbackCategories = array(<%= node[:mediawiki_extensions][:articlefeedback][:categories] %>);
+$wgArticleFeedbackBlacklistCategories = array(<%= node[:mediawiki_extensions][:articlefeedback][:blacklist] %>);
+$wgArticleFeedbackNamespaces = array(<%= node[:mediawiki_extensions][:articlefeedback][:namespaces] %>);
+$wgArticleFeedbackLotteryOdds = "<%= node[:mediawiki_extensions][:articlefeedback][:lottery] %>";
+$wgArticleFeedbackDashboard = "<%= node[:mediawiki_extensions][:articlefeedback][:dashboard] %>";
+$wgArticleFeedbackRatings = "<%= node[:mediawiki_extensions][:articlefeedback][:ratings] %>";

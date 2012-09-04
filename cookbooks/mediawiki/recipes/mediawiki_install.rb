@@ -21,7 +21,7 @@ rightscale_marker :begin
 # otherwise unconfigured server.
 ################################################################################
 
-package "apache2"
+package "apache"
 package "php5"
 package "mysql-server"
 package "ImageMagick"

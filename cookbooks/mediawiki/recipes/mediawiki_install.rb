@@ -21,9 +21,6 @@ rightscale_marker :begin
 # otherwise unconfigured server.
 ################################################################################
 
-package "apache"
-package "php5"
-package "mysql-server"
 package "ImageMagick"
 
 ################################################################################
@@ -37,6 +34,7 @@ install_dir = node[:mediawiki][:installation_directory]
   
 directory install_dir do
   action :create
+  recursive true
 end
 
 if node[:mediawiki][:mw_version] = '1.19.1'

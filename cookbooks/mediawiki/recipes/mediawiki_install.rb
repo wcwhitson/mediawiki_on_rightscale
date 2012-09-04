@@ -17,7 +17,8 @@ rightscale_marker :begin
 # Install Dependencies
 ################################################################################
 # Typically, most of these will already be installed, but this ensures that a
-# full install can be completed even if the MediaWiki scripts are run alone.
+# full install can be completed even if the MediaWiki scripts are run on an
+# otherwise unconfigured server.
 ################################################################################
 
 package "apache2"

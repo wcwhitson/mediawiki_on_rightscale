@@ -5,7 +5,7 @@
 ################################################################################
 # Copyright 2012 Bill Whitson.  All rights reserved.
 ################################################################################
-# Author: Bill Whitson <bill@cloudopt.com>
+# Author: Bill Whitson <billspamcan@gmail.com>
 ################################################################################
 # First time build of the MediaWiki database.  This should be run as an
 # operational script following first time installation.

@@ -3,7 +3,6 @@
 #
 # Copyright Bill Whitson.  All rights reserved.
 
-set[:mediawiki][:vendor_name] = "CloudOpt"
 set[:mediawiki][:product_name] = "MediaWiki"
 set[:mediawiki][:package_name_current] = "mediawiki-1.19.1.tar.gz"
 set[:mediawiki][:package_url_current] = "http://download.wikimedia.org/mediawiki/1.19/mediawiki-1.19.1.tar.gz"

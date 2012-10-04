@@ -5,7 +5,7 @@
 ################################################################################
 # Copyright 2012 Bill Whitson.  All rights reserved.
 ################################################################################
-# Author: Bill Whitson <bill@cloudopt.com>
+# Author: Bill Whitson <billspamcan@gmail.com>
 ################################################################################
 # This recipe will update MediaWiki settings, other than the database settings.
 # If you need to change database settings, you might as well just run

@@ -5,7 +5,7 @@
 ################################################################################
 # Copyright 2012 Bill Whitson.  All rights reserved.
 ################################################################################
-# Author: Bill Whitson <bill@cloudopt.com>
+# Author: Bill Whitson <billspamcan@gmail.com>
 ################################################################################
 # First time installation and configuration of mediawiki.  This script installs
 # everything necessary to run MediaWiki except the database
